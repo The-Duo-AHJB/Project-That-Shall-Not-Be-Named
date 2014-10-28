@@ -23,11 +23,11 @@ create table item
 ItemID int not null,
 title varchar(150),
 description varchar(500),  
-startingBid double, #I assume that this must be a double since there is an 11.50 bid somewhere
+startingBid double,
 highestBid double,
 endDate date,
 SellerID int not null,
-status varchar(20),  #This might need to be something different because we're only shown that it can be 'open', 'sold', or 'shipped'.
+status varchar(20),  #Make this an enum for 'open', 'sold', or 'shipped'.
 category varchar(50),
 constraint pk_item primary key(ItemID),
 constraint fk_item_SellerID foreign key(SellerID) references egccuser(UserID)
@@ -38,7 +38,7 @@ create table Bid
 BuyerID int not null,
 ItemID int not null,
 dateOfBid date,
-timeOfBid time, #at this very moment I'm not remembering if this is enough
+timeOfBid time, 
 currentBid double,
 constraint pk_Bid primary key(BuyerID, ItemID, dateOfBid, timeOfBid),
 constraint fk_Buyer foreign key(BuyerID) references egccuser(UserID),
@@ -49,7 +49,7 @@ create table sellerRating
 (
 SellerID int not null,
 BuyerID int not null,
-rating char(1),  #might need to only be 1-5 if that's possible
+rating char(1),  #Make this enum for 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5
 comments varchar(300),
 dateRated date,
 constraint pk_sellerRating primary key(SellerID, BuyerID),
