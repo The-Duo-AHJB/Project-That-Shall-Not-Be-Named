@@ -30,7 +30,7 @@ SellerID int not null,
 status varchar(20),  #This might need to be something different because we're only shown that it can be 'open', 'sold', or 'shipped'.
 category varchar(50),
 constraint pk_item primary key(ItemID),
-constraint fk_item foreign key(SellerID) references egccuser(UserID)
+constraint fk_item_SellerID foreign key(SellerID) references egccuser(UserID)
 );
 
 create table Bid
@@ -39,6 +39,7 @@ BuyerID int not null,
 ItemID int not null,
 dateOfBid date,
 timeOfBid time, #at this very moment I'm not remembering if this is enough
+currentBid double,
 constraint pk_Bid primary key(BuyerID, ItemID, dateOfBid, timeOfBid),
 constraint fk_Buyer foreign key(BuyerID) references egccuser(UserID),
 constraint fk_ItemID foreign key(ItemID) references item(ItemID)
@@ -52,8 +53,8 @@ rating char(1),  #might need to only be 1-5 if that's possible
 comments varchar(300),
 dateRated date,
 constraint pk_sellerRating primary key(SellerID, BuyerID),
-constraint fk_SellerID foreign key(SellerID) references egccuser(UserID),
-constraint fk_BuyerID foreign key(BuyerID) references egccuser(UserID)
+constraint fk_sellerRating_SellerID foreign key(SellerID) references egccuser(UserID),
+constraint fk_sellerRating_BuyerID foreign key(BuyerID) references egccuser(UserID)
 );
 
 create table Purchase
@@ -64,6 +65,6 @@ price double,
 dateSold date,
 dateShipped date,
 constraint pk_purchase primary key(ItemID),
-constraint fk_Item foreign key(ItemID) references item(ItemID),
-constraint fk_Buyer foreign key(BuyerID) references egccuser(UserID)
+constraint fk_Purchase_Item foreign key(ItemID) references item(ItemID),
+constraint fk_Purchase_Buyer foreign key(BuyerID) references egccuser(UserID)
 );
