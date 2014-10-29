@@ -39,7 +39,7 @@ select max(item), itemid from (select count(itemid) as item, ItemID from bid gro
 
 #12.	Ship an item: Change the status of item whose ID is 2212 to “shipped”. Also update the purchase table to indicate that the item was shipped today.
 
-update item set status = "shipped" where itemid = 2212;
+update item set status = "shipped" where itemid = 2212; #Are we allowed to use two seperate update functions.
 update purchase set dateShipped = sysdate() where itemid = 2212;
 
 #13.	View highest bid: Find the highest bid on the item whose ID is 2211.
@@ -48,7 +48,7 @@ update purchase set dateShipped = sysdate() where itemid = 2212;
 	insert into bid values( 114, 2211, 20141017, "11:25:00", 20);
 #15.	Rate a seller: Place a rating where buyer whose ID is 113, sellerID is 111 and the rating is 1. Use today’s date as the date for the rating. Do not specify a description.
 
-insert into sellerRating values (111, 113, 1,'', sysdate());
+insert into sellerRating values (111, 113, 1,'', sysdate()); #Ask if it's ok to use sysdate even though it is unable to post the time of day
 
 #16.	Close an auction: Close the auction for item whose ID is 2211 by setting the highest bid as the price and today’s date as the purchase date. Note that for this query, you need to do multiple insert/update statements. 
 
