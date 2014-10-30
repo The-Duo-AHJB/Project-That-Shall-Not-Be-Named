@@ -52,4 +52,8 @@ insert into sellerRating values (111, 113, 1,'', date(sysdate())); #Ask if it's 
 
 #16.	Close an auction: Close the auction for item whose ID is 2211 by setting the highest bid as the price and today’s date as the purchase date. Note that for this query, you need to do multiple insert/update statements. 
 
+insert into purchase values ((select buyerid from (select max(currentbid), buyerid from bid where itemid = 2211 group by itemid) FinalBidder), 2211, (select highestbid from item where itemid = 2211), date(sysdate()), null); 
+
 #17.	View top sellers: Display the sellers in descending order of their average rating.
+
+select sellerid, avg(rating) from sellerrating group by sellerid order by avg(rating) desc;
